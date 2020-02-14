@@ -6,6 +6,10 @@ import Cockpit from '../components/Cockpit/Cockpit';
 // import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    console.log('[App.js] constructor');
+  }
   state = {
     persons: [
       { id: 'asfa1', name: 'Max', age: 28 },
@@ -15,6 +19,21 @@ class App extends Component {
     otherState: 'some other value',
     showPersons: false
   };
+
+  static getDerivedStateFromProps(props, state) {
+    //React can execute this correctly. You will get your props and your state in here and you should return your updated state
+    console.log('[App.js] get derived state from props', props );
+    return state;
+  }
+
+  // componentWillMount() {
+  //   //it would be something like preparing your state correctly and that is something you would now do in the getDerivedStateFromProps and both were actually relatively seldom to be used and therefore this will be removed
+  //   console.log('[App.js] component will mount');
+  // }
+
+  componentDidMount() {
+    console.log('[App.js] component did mount');
+  }
 
   nameChangedHandler = (event, id) => {
     const personIndex = this.state.persons.findIndex(p => {
@@ -48,6 +67,7 @@ class App extends Component {
   };
 
   render() {
+    console.log('[App.js] render')
     let persons = null;
  
 
@@ -64,7 +84,8 @@ class App extends Component {
 
     return (
       <div className={classes.App}>
-        <Cockpit 
+        <Cockpit
+          title={this.props.appTitle}
           showPersons={this.state.showPersons}
           persons={this.state.persons}
           clicked={this.togglePersonsHandler}/>
