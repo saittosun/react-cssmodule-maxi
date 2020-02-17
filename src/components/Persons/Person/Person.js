@@ -1,5 +1,6 @@
 // jshint esversion: 6
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import classes from './Person.css';
 import withClass from '../../../hoc/withClass';
@@ -27,6 +28,14 @@ class Person extends Component {
       </Aux>
     );
   }
+}
+
+//in this object, you define which props this component uses and which type of data each component should be of.
+Person.propTypes = {
+  click: PropTypes.func,
+  name: PropTypes.string,
+  age: PropTypes.number,
+  changed: PropTypes.func
 }
 
 export default withClass(Person, classes.Person);
