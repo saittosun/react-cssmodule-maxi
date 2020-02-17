@@ -1,6 +1,7 @@
 // jshint esversion: 6
 import React, { PureComponent } from 'react';
 import Person from './Person/Person';
+// import AuthContext from '../../context/auth-context';
 
 class Persons extends PureComponent {
   // static getDriveStateFromProps(props, state) {
@@ -44,17 +45,19 @@ class Persons extends PureComponent {
 
   render() {
     console.log('[Persons.js] is rendering...')
-    return this.props.persons.map((person, index) => {
-      return (
-        <Person
-          click={() => this.props.clicked(index)}
-          name={person.name}
-          key={person.id}
-          age={person.age}
-          changed={event => this.props.changed(event, person.id)}
-        />
-      );
-    });
+    return (
+      this.props.persons.map((person, index) => {
+        return (
+          <Person
+            click={() => this.props.clicked(index)}
+            name={person.name}
+            key={person.id}
+            age={person.age}
+            changed={event => this.props.changed(event, person.id)}
+          />
+        );
+      })
+    ) 
   }
 }
 
